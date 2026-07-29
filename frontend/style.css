@@ -1,0 +1,372 @@
+/* ============================================================
+   TOKENS — warm field-journal palette
+   ============================================================ */
+:root {
+  --cream: #faf6ec;
+  --paper: #f2ecdd;
+  --card: #fffdf7;
+  --line: #e2d9bf;
+
+  --ink: #2b3328;
+  --ink-soft: #5b6650;
+  --ink-faint: #94997f;
+
+  --leaf: #3a6b3e;
+  --leaf-deep: #26492b;
+  --wheat: #d9a441;
+  --wheat-soft: #f0d99a;
+  --rust: #b5563c;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  background-image: radial-gradient(circle at 100% 0%, rgba(217,164,65,0.10), transparent 45%),
+                     radial-gradient(circle at 0% 100%, rgba(58,107,62,0.08), transparent 50%);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+.topbar { border-bottom: 1px solid var(--line); }
+.topbar-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand-leaf { width: 20px; height: 20px; color: var(--leaf); }
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.brand-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.wrap { max-width: 720px; margin: 0 auto; padding: 48px 20px 70px; }
+
+.hero { margin-bottom: 36px; }
+.hero-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--leaf);
+  background: rgba(58,107,62,0.08);
+  border: 1px solid rgba(58,107,62,0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 1.14;
+  margin: 0 0 14px;
+  color: var(--leaf-deep);
+}
+.hero-sub {
+  color: var(--ink-soft);
+  font-size: 16px;
+  max-width: 54ch;
+  margin: 0;
+}
+
+/* ============================================================
+   CARDS (generic)
+   ============================================================ */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 0 rgba(43,51,40,0.02);
+}
+.card-tab {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--leaf-deep);
+  background: var(--wheat-soft);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 20px;
+}
+.card-tab.error-tab { background: #f3d9d1; color: var(--rust); }
+
+/* ============================================================
+   INPUT CARD
+   ============================================================ */
+.query-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.field {
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  padding: 10px 14px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.field:focus-within { border-color: var(--leaf); background: var(--card); }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-bottom: 3px;
+}
+.field-hint { font-weight: 400; color: var(--ink-faint); }
+.field input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  padding: 0;
+}
+.field input::placeholder { color: var(--ink-faint); }
+.field input[type="date"] { font-family: var(--font-body); font-size: 15px; }
+
+.scan-btn {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 4px;
+  padding: 14px;
+  background: var(--leaf);
+  color: var(--cream);
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.scan-btn:hover { background: var(--leaf-deep); }
+.scan-btn:active { transform: scale(0.99); }
+.scan-btn:focus-visible { outline: 2px solid var(--wheat); outline-offset: 2px; }
+.scan-btn:disabled { background: var(--ink-faint); cursor: progress; }
+
+/* ============================================================
+   STATUS / LOADING — a sprout growing across a track
+   ============================================================ */
+.status-card { text-align: center; }
+.sprout-row { margin-bottom: 14px; }
+.sprout-track {
+  height: 6px;
+  background: var(--paper);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.sprout-fill {
+  height: 100%;
+  width: 20%;
+  background: linear-gradient(to right, var(--wheat), var(--leaf));
+  border-radius: 4px;
+  animation: grow-sweep 1.6s ease-in-out infinite;
+}
+@keyframes grow-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(500%); }
+}
+.status-text {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+.error-card { border-color: #e3c3b8; }
+.error-card p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+
+/* ============================================================
+   RESULTS
+   ============================================================ */
+.crop-result {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+.crop-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+}
+.crop-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 38px;
+  color: var(--leaf-deep);
+}
+
+.confidence-block { margin-bottom: 28px; }
+.confidence-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+.confidence-value { font-family: var(--font-mono); color: var(--ink); }
+.grain-track {
+  height: 14px;
+  background: var(--paper);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.grain-fill {
+  height: 100%;
+  width: 0%;
+  background: repeating-linear-gradient(
+    115deg,
+    var(--wheat) 0px, var(--wheat) 8px,
+    #e3b558 8px, #e3b558 16px
+  );
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* season timeline: sowing -> peak -> harvest */
+.season-timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.season-stop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  width: 100px;
+  text-align: center;
+}
+.season-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--card);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.season-dot.sowing { background: var(--wheat); }
+.season-dot.peak { background: var(--leaf); }
+.season-dot.harvest { background: var(--rust); }
+.season-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.season-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+.season-line {
+  flex: 1 1 auto;
+  height: 2px;
+  background: var(--line);
+  margin-top: 6px;
+}
+
+/* ============================================================
+   CHART
+   ============================================================ */
+.chart-card svg { width: 100%; height: auto; display: block; }
+
+/* ============================================================
+   PROBABILITY LIST
+   ============================================================ */
+.prob-list { display: flex; flex-direction: column; gap: 12px; }
+.prob-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 46px;
+  align-items: center;
+  gap: 12px;
+}
+.prob-crop { font-size: 13px; color: var(--ink-soft); font-weight: 500; }
+.prob-track {
+  height: 8px;
+  background: var(--paper);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.prob-fill { height: 100%; background: var(--wheat-soft); }
+.prob-pct {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+  text-align: right;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  text-align: center;
+  padding: 20px 20px 40px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.hidden { display: none !important; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 560px) {
+  .hero h1 { font-size: 32px; }
+  .query-form { grid-template-columns: 1fr; }
+  .crop-name { font-size: 30px; }
+  .season-timeline { flex-wrap: wrap; }
+  .season-stop { width: 80px; }
+  .prob-row { grid-template-columns: 70px 1fr 38px; }
+}

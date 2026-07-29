@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Journal — Know Your Crop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <svg class="brand-leaf" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C8 5 4 9 4 14a8 8 0 0 0 8 8 8 8 0 0 0 8-8c0-5-4-9-8-12Z" fill="currentColor"/>
+        <path d="M12 6v16" stroke="var(--cream)" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">Field Journal</span>
+    </div>
+    <span class="brand-tag">Sentinel-2 · NDVI · Crop ID</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <span class="hero-kicker">FROM SATELLITE TO SEASON</span>
+    <h1>What's growing<br>in that field?</h1>
+    <p class="hero-sub">
+      Drop a coordinate and a date. We'll trace the crop's whole growing season
+      from real satellite imagery — sowing, peak growth, harvest — and tell you
+      what it is.
+    </p>
+  </section>
+
+  <section class="card input-card">
+    <div class="card-tab">Plant a query</div>
+
+    <form id="query-form" class="query-form">
+      <div class="field coords-field">
+        <label for="coords">Coordinates <span class="field-hint">(lat, long)</span></label>
+        <input type="text" id="coords" name="coords" placeholder="18.5204, 73.8567" inputmode="decimal" required>
+      </div>
+
+      <div class="field">
+        <label for="date">Observation date</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <button type="submit" id="scan-btn" class="scan-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8 5 4 9 4 14a8 8 0 0 0 8 8 8 8 0 0 0 8-8c0-5-4-9-8-12Z" fill="currentColor"/>
+        </svg>
+        <span>Trace the field</span>
+      </button>
+    </form>
+  </section>
+
+  <section id="status-panel" class="card status-card hidden">
+    <div class="sprout-row">
+      <div class="sprout-track"><div class="sprout-fill" id="sprout-fill"></div></div>
+    </div>
+    <p id="status-text" class="status-text">Reaching the satellite…</p>
+  </section>
+
+  <section id="error-panel" class="card error-card hidden">
+    <div class="card-tab error-tab">Couldn't trace this one</div>
+    <p id="error-text"></p>
+  </section>
+
+  <section id="results" class="results hidden">
+
+    <div class="card result-card">
+      <div class="crop-result">
+        <span class="crop-eyebrow">IDENTIFIED AS</span>
+        <span class="crop-name" id="crop-name">—</span>
+      </div>
+
+      <div class="confidence-block">
+        <div class="confidence-header">
+          <span>Confidence</span>
+          <span id="confidence-value" class="confidence-value">0%</span>
+        </div>
+        <div class="grain-track">
+          <div id="grain-fill" class="grain-fill"></div>
+        </div>
+      </div>
+
+      <div class="season-timeline" id="season-timeline">
+        <div class="season-stop">
+          <span class="season-dot sowing"></span>
+          <span class="season-label">Sowing</span>
+          <span class="season-date" id="date-start">—</span>
+        </div>
+        <div class="season-line"></div>
+        <div class="season-stop">
+          <span class="season-dot peak"></span>
+          <span class="season-label">Peak growth</span>
+          <span class="season-date" id="date-peak">—</span>
+        </div>
+        <div class="season-line"></div>
+        <div class="season-stop">
+          <span class="season-dot harvest"></span>
+          <span class="season-label">Harvest window</span>
+          <span class="season-date" id="date-end">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card chart-card">
+      <div class="card-tab">Growth curve</div>
+      <svg id="ndvi-chart" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+
+    <div class="card prob-card">
+      <div class="card-tab">Other candidates</div>
+      <div id="prob-list" class="prob-list"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>Sentinel-2 SR Harmonized · Google Earth Engine · RandomForest classifier</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

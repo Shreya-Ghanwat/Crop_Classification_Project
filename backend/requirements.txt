@@ -1,0 +1,13 @@
+flask
+flask-cors
+earthengine-api
+pandas
+numpy
+scipy
+scikit-learn
+joblib
+openpyxl
+matplotlib
+seaborn
+streamlit
+plotly
