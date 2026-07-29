@@ -12,13 +12,10 @@ DEFAULT_MONTHS_WINDOW = 12
 
 def initialize_earth_engine(project=None):
     """
-    Authenticate + initialize Earth Engine.
-
-    If no project is passed, automatically read it from the
-    GEE_PROJECT environment variable.
+    Initialize Google Earth Engine.
     """
     if project is None:
-        project = os.environ.get("GEE_PROJECT")
+        project = os.getenv("GEE_PROJECT", "central-lock-500609-g8")
 
     try:
         ee.Initialize(project=project)
